@@ -1,0 +1,30 @@
+{% extends 'guest_base.html' %} 
+{% block content %} 
+{% include 'guest/nav.html' %} 
+
+<div class="container ">
+   <br>
+
+    <div class="row">
+        {% for a in awards %} 
+        <div class="col-6 mt-2 mb-2">
+            <div class="card p-3">
+
+                <div class="card-image-top">
+                    <img src="{{a.image.url}}" class="img-fluid rounded" style="height:250px; width:100%;" alt="">
+                </div>
+                <div class="cart-title">
+                   <a href="{% url 'award_view' a.id %}"style='text-decoration:none;'> <h3>{{a.event_name}}</h3></a>
+                    <em>{{a.event_date}}</em>
+                    <hr>
+                </div>
+                <div class="cart-body">
+                    <p>{{a.event_desc}}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %} 
+    </div>
+</div>
+
+{% endblock %} 

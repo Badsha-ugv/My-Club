@@ -1,0 +1,50 @@
+{% extends 'guest_base.html' %}
+{% load static %} 
+
+{% block style %}
+<style>
+  .gallery{
+    
+  }
+  .gallery img{
+    width: 25%; 
+    padding:5px;
+    filter: grayscale(100);
+    transition: 1s;
+  }
+
+  .gallery img:hover{
+  filter: grayscale(0);
+  transform: scale(1.1);
+
+  }
+
+  
+</style>
+
+
+{% endblock %}
+
+
+{% block content %}
+{% include 'guest/nav.html' %} 
+
+<div class="container">
+
+
+<div class="gallery">
+{% for image in images %}
+  <a href="{{ image.image.url }}" data-lightbox="show">
+    <img src="{{ image.image.url }}" alt="">
+  </a>
+
+  
+{% endfor %}
+</div>
+
+</div>
+
+
+
+{% endblock %}
+

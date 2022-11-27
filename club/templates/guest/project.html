@@ -1,0 +1,39 @@
+{% extends 'guest/home.html' %}
+{% load custom_filters %} 
+{% block content %}
+{% include 'guest/nav.html' %}
+<div class="container">
+
+    <h1 class="text-success text-center mt-3">Project Show Case</h1>
+    <hr>
+
+    <div class="row py-3">
+        {% for p in projects %}
+        <div class="col-6 mt-2">
+            <div class="card shadow p-3">
+                <!-- <div class="card-title">
+                    {% if not p.user.first_name %} 
+                    <h5><b>{{p.user.username }}</b></h5>
+                    {% else %} 
+                    <h5><b>{{p.user.first_name }} {{ p.user.last_name }}</b></h5>
+                    {% endif %} 
+                    
+                    <em>{{p.publish_date}}</em>
+                </div> -->
+                <img src="{{p.image.url}}" class="img-thumbnail rounded " style="width:100%; height:250px; object-fit:contain;" alt="">
+                <div class="card-body">
+                    <h3 class="card-title text-muted">{{p.project_name}}</h3>
+                    <p class="card-text">{{p.project_description|read_more|linebreaks}}</p>
+
+                    <a href="{% url 'project_view' p.id %}" class="btn btn-primary">
+                        read more
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        {% endfor %} 
+    </div>
+</div>
+
+{% endblock %}

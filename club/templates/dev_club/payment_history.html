@@ -1,0 +1,78 @@
+{% extends 'base.html' %} 
+{% block title %} Member List {% endblock %} 
+{% block content %}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div id="dataTable_filter" class="dataTables_filter">
+                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder=""
+                                    aria-controls="dataTable" /></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                            role="grid" aria-describedby="dataTable_info" style="width: 100%">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                        colspan="1" aria-sort="ascending"
+                                        aria-label="Name: activate to sort column descending" style="width: 161px">
+                                        Name
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Position: activate to sort column ascending" style="width: 150px">
+                                        Student Id
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Office: activate to sort column ascending" style="width: 115px">
+                                        Phone Number
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Age: activate to sort column ascending" style="width: 51px">
+                                        Batch
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Start date: activate to sort column ascending" style="width: 108px">
+                                        Join Date
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 157px">
+                                        Address
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1"
+                                        aria-label="Salary: activate to sort column ascending" style="width: 157px">
+                                        Due
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for i in payment_history %}
+                                <tr class="odd">
+                                    <td class="sorting_1">{{i.member.first_name}} {{ i.member.last_name }}</td>
+                                    <td>{{i.member.student_id}}</td>
+                                    <td>{{i.member.phone_number}}</td>
+                                    <td>{{i.member.batch}}</td>
+                                    <td>{{i.member.created_at}}</td>
+                                    <td>{{i.member.address}}</td>
+                                    <td>{{i.due_amount}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

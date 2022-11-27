@@ -1,0 +1,209 @@
+{% extends 'guest_base.html' %} 
+{% load custom_filters %}
+{% block content %} 
+{% include 'guest/nav.html' %}
+
+
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-7 ">
+      <div class="profile position-relative d-flex mt-4">
+
+
+        <div class="profile-img ">
+          {% if user.profile_pic %} 
+          <img src="{{ user.profile_pic.url }}" />
+          {% else %}
+          <img src="https://picsum.photos/200" />
+          {% endif %}
+        </div>
+        <div class="profile-text">
+          <h4>{{ user.first_name}} {{ user.last_name}} </h4>
+          <p>{{ user.student_id}}</p>
+
+          <a href="{% url 'create_project' %}" class="btn btn-primary">Upload Project </a>
+
+        </div>
+        <div class="profile-update">
+          <a class='btn btn-info btn-sm' href="{% url 'update_profile' request.user.id %}">Update</a>
+        </div>
+
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header text-center">
+              <b> My Current Due </b>
+            </div>
+            <div class="card-body text-center">
+              {% if my_due.ammount > 0 %} 
+              <h1>{{ my_due.ammount }} tk</h1>
+              {% else %} 
+              <h1>0</h1>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="col-6">
+          <div class="card">
+            <div class="card-header text-center">
+              <b> My Total Project </b>
+            </div>
+            <div class="card-body text-center">
+              <h1> 05 </h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <br>
+      <div class="row mb-3">
+        <div class="col-12 ">
+          {% for p in project %} 
+          <div class="card shadow ">
+            <div class="card-header d-flex">
+              {% if p.user.profile_pic %} 
+              <img style="width:45px; height:45px; border-radius:50%;" src="{{ p.user.profile_pic.url }}" />
+              {% else %}
+              <img style="width:45px; height:45px; border-radius:50%;" src="https://picsum.photos/200" />
+              {% endif %}
+              <div class="ml-2">
+                
+                <b> &nbsp; {{ p.user.first_name }}  {{ p.user.last_name }}</b> 
+                <p> &nbsp; {{ p.publish_date}}</p>
+              </div>
+            </div>
+            <!-- <div class="card-img"> -->
+              <img class="img-thumbnail" style="height: 300px; object-fit: contain;" src="{{ p.image.url }}" />
+            <!-- </div> -->
+            <div class="card-body">
+            
+                <h3 class="card-title ">{{ p.project_name}}</h3>
+              
+              <p> {{ p.project_description|linebreaks|read_more }} </p>
+
+            </div>
+            <div class="readme-btn">
+
+              <a class=" btn btn-sm btn-info " href="{% url 'project_view' p.id %}">read more</a>
+            </div>
+          </div>
+          <br>
+        {% endfor %}
+        </div>
+      </div>
+      <!-- Last line of left section -->
+    </div>
+
+    <!-- End of Left Side -->
+    <!-- right side -->
+    <div class="col-5">
+      <br>
+      <div class="card mx-auto">
+        <div class="card-header text-center">
+          <span> <b> Programming Club Fund </b> </span>
+        </div>
+        <div class="card-body">
+          <h1 class="text-center">{{ pro_fund.total }}tk</h1>
+        </div>
+      </div>
+      <br>
+      <div class="card mx-auto">
+        <div class="card-header text-center">
+          <span> <b> Development Club Fund </b> </span>
+        </div>
+        <div class="card-body">
+          <h1 class="text-center">{{ dev_fund.total }}tk</h1>
+        </div>
+      </div>
+      <br>
+      <div class="card mx-auto">
+        <div class="card-header text-center">
+          <span> <b>Upcomming Event </b> </span>
+        </div>
+        <div class="card-body ">
+          {% for event in p_event %}
+          <div class="card card-body" style="border-left:2px solid ;">
+            <p class="text-muted mb-0" style="font-weight:700;"> > {{ event.name }}</p>
+            <em>({{ event.start_date}}) to ({{ event.end_date }})</em>
+          </div> 
+            
+            {% endfor %}
+            
+
+           
+            
+          </ul>
+        </div>
+      </div>
+      <br>
+      <div class="card card-body table-bordered " style="overflow-y:auto;height:350px;">
+        <div class="card-title">
+          <b>Programming Club Member List</b>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Student ID </th>
+              <th>Semester</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p_member in p_member_list %} 
+            <tr>
+              <td>{{ p_member.first_name }} {{ p_member.last_name }}</td>
+              <td>{{ p_member.student_id }}</td>
+              <td>{{ p_member.phone_number }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <br>
+      <div class="card card-body table-bordered " style="overflow-y:auto;height:350px;">
+        <div class="card-title">
+          <b>Development Club Member List</b>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Student ID </th>
+              <th>Semester</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for d_member in d_member_list %} 
+            <tr>
+              <td>{{ d_member.first_name }} {{ d_member.last_name }}</td>
+              <td>{{ d_member.student_id }}</td>
+              <td>{{ d_member.phone_number}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+
+
+
+  </div>
+
+
+</div>
+
+{% endblock %} 
+
+
+
+

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %} Event List {% endblock %}
+
+{% block content %}
+
+<h3>Event List</h3>
+
+<div class="row">
+    <div class="col-xl-12 py-3 mx-auto col-md-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Event List</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered dataTable" id="dataTable" width="100%"
+                                    cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 170px;">Event Name
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Position: activate to sort column ascending"
+                                                style="width: 90px;">
+                                                Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Office: activate to sort column ascending"
+                                                style="width: 150px;">
+                                                Start Date</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Age: activate to sort column ascending"
+                                                style="width: 150px;">End Date
+                                            </th>
+
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Salary: activate to sort column ascending"
+                                                style="width: 200px;">
+                                                Descreptoin</th>
+                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Salary: activate to sort column ascending"
+                                                style="width: 200px;">
+                                                Update Status</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        {% for i in event_list %}
+                                        <tr class="odd">
+                                            <td class="sorting_1">{{i.name}}</td>
+
+                                            <td>{{i.event_status}}</td>
+                                            <td>{{i.start_date}}</td>
+                                            <td>{{i.end_date}}</td>
+                                            <td>{{i.description}}</td>
+                                            <td>
+                                                {% if i.event_status == 'COMPLETE' %}
+                                                <a href="{% url 'dev_delete_event' i.id %}"
+                                                    class="btn btn-danger btn-sm">Delete</a>
+                                                {% else %}
+                                                <a href="{% url 'dev_complete_event' i.id %}"
+                                                    class="btn btn-success btn-sm">Complete</a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

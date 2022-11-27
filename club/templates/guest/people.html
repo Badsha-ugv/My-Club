@@ -1,0 +1,47 @@
+{% extends 'guest_base.html' %} {% block content %} 
+{% load static %} 
+{% include 'guest/nav.html' %}
+<div class="container">
+ <br>
+
+        <div class="row featurette mb-2">
+          <div class="col-md-7 order-md-2 d-flex flex-column justify-content-center ">
+            <h2 class="featurette-heading">Dr. Imran Chowdhury </h2>
+            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto rounded"  alt="bot" style="width: 100%; height: 300px; " src="{% static 'assets/img/bot.jpg' %}" data-holder-rendered="true">
+          </div>
+        </div>
+        <div class="text-center">
+            <h3 class="text-muted">Faculty</h3>
+        </div>
+  <div class="row mb-3">
+    {% for p in people %}
+    <div class="col-lg-4">
+      <div class="card d-flex p-3 shadow border-left-success ">
+        <div class="card-img-top text-center">
+
+        
+        <img
+          src="{{p.image.url}}"
+          class="img-fluid rounded-circle"
+          style="width: 150px; height: 150px"
+          alt=""
+        />
+        </div>
+        <div class="card-body text-center">
+          <h2>{{p.name}}</h2>
+
+          <em>{{p.title}}</em>
+          <br />
+          <i>{{p.phone}}</i>
+          <p>{{p.bio}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

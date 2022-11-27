@@ -1,0 +1,158 @@
+{% extends 'guest_base.html' %}
+{% block content %}
+{% include 'guest/nav.html' %}
+
+<div class="container">
+
+
+
+    <div id="carouselExampleControls" class="carousel mt-3  slide my-slide" data-bs-ride="carousel">
+        <div class="carousel-inner  " style="width: 100%; height:350px;">
+
+            <div class="carousel-item active ">
+                <img src="{{ project.image.url }}"   class="mx-auto d-block " style="max-width:100%; height:350px; object-fit: cover;" 
+                    alt="...">
+            </div>
+            {% for img in more_image %}
+            <div class="carousel-item">
+                <img src="{{ img.image.url}}"  style="max-width:100%; height:350px; object-fit: cover;"  class="mx-auto d-block img-fluid"  alt="...">
+            </div>
+            {% endfor %}
+            <!-- <img src="https://picsum.photos/200" class="d-block w-100" alt="..."> -->
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+    </div>
+
+    <div class="row mt-3 ">
+
+        <div class="card w-50   mx-auto">
+
+
+            <h3 class="text-center">{{ project.project_name }}</h3>
+            <div class="col text">
+                <h3 class="text-center">Author : {{ project.user.first_name }} {{ project.user.last_name }}</h3>
+                <p class="text-center">Published at :{{ project.publish_date}}</p>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="card w-75 mx-auto ">
+
+            <p>{{ project.project_description|linebreaks }}</p>
+
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card w-75 mx-auto">
+                <div class="row ">
+
+
+                    <div class="col-5 p-3">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="">Write Comment Here</label>
+                                <textarea class="form-control mt-2" name="comment_text" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-secondary mt-2" value="comment">
+
+                        </form>
+                    </div>
+                    
+                    <div class="col-7 mt-3" style="height:220px; overflow-y:auto;">
+                        <h5 class="mb-0">Comment: </h5>
+                        <hr>
+                        {% for c in comment %}
+                        <div class="user-comment mb-2" style="padding:8px;border-radius:8px;border:1px solid;">
+                            <b>{{ c.user.username }}</b>
+                            <p>{{ c.date}}</p>
+                            <div class="card">
+                                <div class="card-text">
+                                    {{ c.text}}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+</div>
+
+{% endblock %}
+
+<!-- <div class="row"> 
+        <div class="card">
+            <div class="card-img-top text-center">
+                <img src="{{ project.image.url }}" class="img-responsive" width="500px" height="500px" alt="">
+            </div>
+            
+
+
+                <h3>{{project.project_name }}</h3>
+                Posted By : <em><b>{{ project.user.first_name }} {{ project.user.last_name }}</b></em>
+                at : <em>{{ project.publish_date }}</em>
+                <hr>
+
+                <p>
+                    {{project.project_description|linebreaks}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="">Comment Here</label>
+                            <textarea class="form-control" name="comment_text" id="" cols="30" rows="5"></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-secondary mt-2" value="comment">
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card " style="height:250px; overflow-y:auto; margin-bottom:20px;">
+                <div class="card-body border-left-success ">
+                    {% for c in comment %}
+
+                    <h5>{{c.text }}</h5>
+                    <em> by <b>{{c.user.username }}</b>{{c.date}}</em>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+ slider 
+
+ 

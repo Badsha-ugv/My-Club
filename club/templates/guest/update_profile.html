@@ -1,0 +1,71 @@
+{% extends 'guest_base.html' %} 
+
+{% block content %}
+{% include 'guest/nav.html' %} 
+
+
+
+
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+        <strong>Message: </strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {% endfor %}
+      {% endif %} 
+
+
+
+<div class="container">
+    <h3>Update Profile</h3>
+    <div class="card p-3 w-75 mx-auto">
+        <div class="card-title">
+            <em>Update Profile</em>
+        </div>
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" value="{{ user.username }}" class="form-control" name="username" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" value="{{ user.first_name }}" class="form-control" name="fname" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" value="{{ user.last_name }}" class="form-control" name="lname" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="text" value="{{ user.email }}" class="form-control" name="email" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Phone Number</label>
+                    <input type="text" value="{{ user.email }}" class="form-control" name="phone" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Student ID</label>
+                    <input type="text" value="{{ user.student_id }}" class="form-control" name="stu_id" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" name="password" id="" placeholder="if only can change">
+                </div>
+                <div class="form-group">
+                    <label for="">Profile Image</label>
+                    <input type="file" class="form-control" name="img" id="" >
+                </div>
+
+                <input type="submit" value="Update" class="btn btn-info mt-2">
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
